@@ -100,14 +100,11 @@
 .discussion-message{
 }
 
-
 #discussion-messages{
     width:90%;
     margin-left:5%;
     margin-right:5%;
 }
-
-
 
 .discussion-item td{
 }
@@ -115,7 +112,6 @@
 .discussion-item td.discussion-message {
     width:100%;
 }
-
 
 .discussion-date-left{
     text-align:left;

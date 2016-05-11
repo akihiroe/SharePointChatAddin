@@ -42,6 +42,7 @@ function initializePage()
         });
 
         $("#send-message").on("click", function () {
+            if (!$("#input-message").val()) return;
             var discussionProperties = { Body: $("#input-message").val() };
             var currentDisccionItem
 
@@ -133,7 +134,6 @@ function initializePage()
         var qry = createAllMessagesByDisscussionIDQuery(disscussionId, lastmodified);
         var messageItems = list.getItems(qry);
         context.load(messageItems);
-
         context.executeQueryAsync(
             function () {
                 OnItemsLoaded(messageItems);
@@ -228,7 +228,7 @@ function initializePage()
     function createItemMessage(oList)
     {
         var msg;
-        msg = "<tr class='discussion-item' data-lid='" + oList.ID + "' data-Modified='" + oList.Modified + "'>";
+        msg = "<tr class='discussion-item' data-lid='" + oList.ID + "' data-Modified='" + oList.Modified.toISOString() + "'>";
 
         var modified;
         var dt = oList.Modified;
@@ -251,7 +251,6 @@ function initializePage()
     function updateMessages(id, lastmodified, callback) {
         getMessages(discussionBoardTitle, id, lastmodified, 
             function (discussionMessages) {
-                //SUCCESS
                 var cont = $("#discussion-messages tbody");
                 var msg;
                 var context = new SP.ClientContext.get_current();
@@ -260,8 +259,7 @@ function initializePage()
                     var oList = listEnumerator.get_current().get_fieldValues();
 
                     var olditem= $(".discussion-item[data-lid=" + oList.ID + "]");
-                    if (olditem.length > 0 && olditem.data("modified") == oList.Modified)
-                    {
+                    if (olditem.length > 0 && olditem.data("modified") == oList.Modified.toISOString()) {
                         continue;
                     }
 
@@ -278,7 +276,6 @@ function initializePage()
                 callback();
             },
             function () {
-                //ERROR
                 alert("getMessages error");
             });
 

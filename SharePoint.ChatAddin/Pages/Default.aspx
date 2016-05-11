@@ -26,7 +26,6 @@
 
 <%-- 次の Content 要素内のマークアップとスクリプトはページの <body> 内に配置されます --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-
     <div id="navigation-area">
         <div><p>
             <asp:HyperLink runat="server" 
@@ -36,9 +35,7 @@
 
         <p>ディスカッション</p>
         <ul id="discussion-items">
-
         </ul>
-
     </div>
     <div id="main-area">
         <table id="discussion-messages">
@@ -55,8 +52,4 @@
             </tfoot>
         </table>
     </div>
-
-<script type="text/javascript">
-
-</script>
 </asp:Content>
