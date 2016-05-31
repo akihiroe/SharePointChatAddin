@@ -20,7 +20,6 @@ function initializePage()
             function (discussionItems) {
                 allDiscussionItems = discussionItems;
                 var cont = $("#discussion-items");
-                var context = new SP.ClientContext.get_current();
                 var listEnumerator = discussionItems.getEnumerator();
                 while (listEnumerator.moveNext()) {
                     var oList = listEnumerator.get_current().get_fieldValues();
@@ -110,7 +109,7 @@ function initializePage()
     }
 
     function createMessage(discussionItem, properties, OnItemAdded, OnItemError) {
-        var context = new SP.ClientContext.get_current();
+        var context = SP.ClientContext.get_current();
         var messageItem = SP.Utilities.Utility.createNewDiscussionReply(context, discussionItem);
         for (var propName in properties) {
             messageItem.set_item(propName, properties[propName])
@@ -125,7 +124,7 @@ function initializePage()
     }
 
     function getMessages(listTitle, disscussionId, lastmodified, OnItemsLoaded, OnError) {
-        var context = new SP.ClientContext.get_current();
+        var context = SP.ClientContext.get_current();
         var web = context.get_web();
 
         var list = web.get_lists().getByTitle(listTitle);
@@ -191,7 +190,7 @@ function initializePage()
     //http://stackoverflow.com/questions/31434348/displaying-a-user-picture-in-a-sharepoint-web-part
 
     function getUserProfileImage(element, userID) {
-        var clientContext = new SP.ClientContext.get_current();
+        var clientContext = SP.ClientContext.get_current();
         var web = clientContext.get_web();
         var userInfoList = web.get_siteUserInfoList();
         var camlQuery = new SP.CamlQuery();
